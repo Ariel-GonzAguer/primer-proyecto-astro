@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 const pageTitle: string = "About Me";
 
 interface Indentity {
@@ -27,6 +29,9 @@ const skills: string[] = [
 const happy: boolean = true;
 const finished: boolean = false;
 const goal: number = 3;
+const skillColor: string = "yellow";
+const fontWeight: string = "bold";
+const textCase: string = "uppercase";
 ---
 
 <html lang="en">
@@ -36,6 +41,20 @@ const goal: number = 3;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
+    <style define:vars={{ skillColor, fontWeight, textCase }}>
+      body {
+        & h1 {
+          color: purple;
+          font-size: 4rem;
+          text-transform: var(--textCase);
+        }
+
+        & .skill {
+          color: var(--skillColor);
+          font-weight: var(--fontWeight);
+        }
+      }
+    </style>
   </head>
   <body>
     <a href="/">Home</a>
@@ -72,7 +91,7 @@ const goal: number = 3;
     </ul>
     <p>My skills are:</p>
     <ul>
-      {skills.map((skill) => <li>{skill}</li>)}
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
     </ul>
 
     {happy && <p>I am happy to be learning Astro!</p>}
