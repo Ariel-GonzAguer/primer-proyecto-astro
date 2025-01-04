@@ -1,0 +1,31 @@
+---
+import BaseLayeout from "./BaseLayout.astro";
+
+interface Frontmatter {
+  title: string;
+  pubDate: Date;
+  author: string;
+  description: string;
+  image: {
+    url: string;
+    alt: string;
+  };
+  [other: string]: any;
+}
+
+interface Props {
+  frontmatter: Frontmatter;
+}
+
+const { frontmatter }: Props = Astro.props;
+---
+
+<!-- <meta charset="utf-8" />
+añadir para no tener errores en los caracteres especiales -->
+<BaseLayeout pageTitle={frontmatter.title}>
+  <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
+  <p>Written by {frontmatter.author}</p>
+  <p>{frontmatter.description}</p>
+  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+  <slot />
+</BaseLayeout>

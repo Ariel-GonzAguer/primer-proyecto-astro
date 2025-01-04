@@ -1,10 +1,7 @@
 ---
-import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle: string = "About Me";
-
-import Header from "../components/Header.astro";
-import Footer from '../components/Footer.astro';
 
 interface Indentity {
   firstName: string;
@@ -31,8 +28,8 @@ const skills: string[] = [
 
 const happy: boolean = true;
 const finished: boolean = false;
-const goal: number = 3;
-const skillColor: string = "yellow";
+const goal: number = 6;
+const skillColor: string = "green";
 const fontWeight: string = "bold";
 const textCase: string = "uppercase";
 ---
@@ -44,7 +41,10 @@ const textCase: string = "uppercase";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
-    <style define:vars={{ skillColor, fontWeight, textCase }}>
+  </head>
+
+  <BaseLayout pageTitle={pageTitle}>
+    <style is:global define:vars={{ skillColor, fontWeight, textCase }}>
       body {
         & h1 {
           color: purple;
@@ -55,14 +55,14 @@ const textCase: string = "uppercase";
         & .skill {
           color: var(--skillColor);
           font-weight: var(--fontWeight);
+
+          &:hover {
+            color: red;
+            cursor: default;
+          }
         }
       }
     </style>
-  </head>
-  <body>
-    <Header />
-
-    <h1>{pageTitle}</h1>
     <h2>... and my new Astro site!</h2>
 
     <p>
@@ -100,15 +100,11 @@ const textCase: string = "uppercase";
     {finished && <p>I finished this tutorial!</p>}
 
     {
-      goal === 3 ? (
-        <p>My goal is to finish in 3 days.</p>
+      goal === 6 ? (
+        <p>My goal is to finish in 6 days.</p>
       ) : (
         <p>My goal is not 3 days.</p>
       )
     }
-    <Footer />
-    <script>
-      import "../scripts/menu.ts";
-    </script>
-  </body>
+  </BaseLayout>
 </html>
