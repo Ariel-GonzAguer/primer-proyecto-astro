@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
+import type { MarkdownInstance } from "astro";
 
-const allPosts: any[] = Object.values(
+const allPosts: MarkdownInstance<any>[] = Object.values(
   import.meta.glob("./posts/*.md", { eager: true })
 ); // to return information about all your Markdown files. import.meta.glob() will return an array of objects, one for each blog post.
 
