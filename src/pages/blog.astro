@@ -1,5 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPost from "../components/BlogPost.astro";
+
+const allPosts: any[] = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true })
+); // to return information about all your Markdown files. import.meta.glob() will return an array of objects, one for each blog post.
 
 const pageTitle: string = "My Astro Learning Blog";
 ---
@@ -15,9 +20,29 @@ const pageTitle: string = "My Astro Learning Blog";
   <BaseLayout pageTitle={pageTitle}>
     <p>This is where I will post about my journey learning Astro.</p>
     <ul>
-      <li><a href="/posts/post-1/">Post 1</a></li>
+      <!-- <li><a href="/posts/post-1/">Post 1</a></li>
       <li><a href="/posts/post-2/">Post 2</a></li>
-      <li><a href="/posts/post-3/">Post 3</a></li>
+      <li><a href="/posts/post-3/">Post 3</a></li> -->
+
+      <!-- {
+        allPosts.map((post: any) => (
+          <li>
+            <a href={post.url}>{post.frontmatter.title}</a>
+          </li>
+        ))
+      } -->
+
+      {
+        allPosts.map((post: any) => (
+          <BlogPost
+            url={post.url}
+            title={post.frontmatter.title}
+            author={post.frontmatter.author}
+          />
+        ))
+      }
     </ul>
   </BaseLayout>
+
+
 </html>

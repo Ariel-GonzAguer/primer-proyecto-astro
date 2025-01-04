@@ -1,0 +1,14 @@
+---
+interface Props {
+  title: string;
+  url: string;
+  author?: string;
+}
+
+const { title, url, author }: Props = Astro.props;
+---
+
+<li>
+  <a href={url}>{title}</a>
+  {author ? <p>Written by {author}</p> : <p>no author</p>}
+</li>

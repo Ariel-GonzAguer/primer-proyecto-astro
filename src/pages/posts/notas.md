@@ -83,4 +83,9 @@ import Wrapper from '../components/Wrapper.astro';
 
 7. Cuando incluye la propiedad frontmatter `layout` en un archivo .md, todos los valores YAML de frontmatter están disponibles para el archivo de diseño.
    
-8. Siempre agrear al layout para los archivos .md `<meta charset="utf-8" />` para no tener errores en los caracteres especiales
+8. Siempre agrear al layout para los archivos .md `<meta charset="utf-8" />` para no tener errores en los caracteres especiales.
+
+9. Muestra dinámicamente una lista:
+`import.meta.glob()` devolverá un array de objetos. Ejemplo:
+` const allPosts = Object.values(import.meta.glob('./posts/*.md', { anxious: true }));`
+Devuelve información sobre todos tus archivos Markdown.
