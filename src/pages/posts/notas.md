@@ -7,7 +7,7 @@ author: "Astro Learner"
 image:
   url: "https://docs.astro.build/assets/rose.webp"
   alt: "The Astro logo on a dark background with a pink glow."
-tags: ["astro", "blogging", "learning in public"]
+tags: ["astro", "blogging", "learning in public", "notas personales"]
 ---
 
 1. para crear rutas para las páginas, agregar archivos .astro a carpeta pages.
@@ -88,3 +88,26 @@ import Wrapper from '../components/Wrapper.astro';
    `import.meta.glob()` devolverá un array de objetos. Ejemplo:
    ` const allPosts: MarkdownInstance<any>[] = Object.values(import.meta.glob('./posts/*.md', { anxious: true }));`
    Devuelve información sobre todos tus archivos Markdown. El tipo de la constante que almacena esta información es `MarkdownInstance<any>[]`.
+
+10. Los archivos Markdown cargados con `import.meta.glob()` devuelven la siguiente interfaz `MarkdownInstance`:
+
+```
+export interface MarkdownInstance<T extends Record<string, any>> {
+/* Any data specified in this file's YAML frontmatter */
+frontmatter: T;
+/* The absolute file path of this file */
+file: string;
+/* The rendered path of this file */
+url: string | undefined;
+/* Astro Component that renders the contents of this file */
+Content: AstroComponentFactory;
+/** (Markdown only) Raw Markdown file content, excluding layout HTML and YAML frontmatter */
+rawContent(): string;
+/** (Markdown only) Markdown file compiled to HTML, excluding layout HTML */
+compiledContent(): string;
+/* Function that returns an array of the h1...h6 elements in this file */
+getHeadings(): Promise<{ depth: number; slug: string; text: string }[]>;
+default: AstroComponentFactory;
+}
+```
+11. La función `getStaticPaths` devuelve una arreglo de rutas de página, y todas las páginas en esas rutas usarán la misma plantilla definida en el archivo.

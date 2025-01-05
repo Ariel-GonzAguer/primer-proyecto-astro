@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogPost from "../../components/BlogPost.astro";
+import type { MarkdownInstance } from "astro";
+
+interface Frontmatter {
+  title: string;
+  pubDate: Date;
+  author: string;
+  description: string;
+  image: {
+    url: string;
+    alt: string;
+  };
+  tags: string[];
+}
+
+interface Paths {
+  params: {
+    tag: string;
+  };
+  props: {
+    posts: MarkdownInstance<Frontmatter>[];
+  };
+}
+
+//→ Create pages dynamically
+export async function getStaticPaths(): Promise<Paths[]> {
+  // → make data from all your blog posts available to each page route. Always inside getStaticPaths()
+  const allPosts: MarkdownInstance<Frontmatter>[] = Object.values(
+    import.meta.glob<MarkdownInstance<Frontmatter>>("../posts/*.md", {
+      eager: true,
+    })
+  );
+
+  const tags = [
+    "astro",
+    "successes",
+    "community",
+    "blogging",
+    "setbacks",
+    "learning in public",
+    "notas personales",
+  ];
+
+  return tags.map((tag): Paths => ({
+    params: { tag },
+    props: { posts: allPosts },
+  }));
+
+  // → or you can do an extended version like this:
+  // return [
+  //   { params: { tag: "astro" }, props: { posts: allPosts } },
+  //   { params: { tag: "successes" }, props: { posts: allPosts } },
+  //   { params: { tag: "community" }, props: { posts: allPosts } },
+  //   { params: { tag: "blogging" }, props: { posts: allPosts } },
+  //   { params: { tag: "setbacks" }, props: { posts: allPosts } },
+  //   { params: { tag: "learning in public" }, props: { posts: allPosts } },
+  //   { params: { tag: "notas personales" }, props: { posts: allPosts } },
+  // ];
+}
+
+// → estos valores se obtienen de getStaticPaths() automáticamente
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const filteredPosts = posts.filter((post: MarkdownInstance<Frontmatter>) =>
+  post.frontmatter.tags?.includes(tag)
+);
+---
+
+<BaseLayout pageTitle={tag}>
+  <p>Posts tagged with {tag}</p>
+  <ul>
+    {
+      filteredPosts.map((post: any) => (
+        <BlogPost
+          url={post.url}
+          title={post.frontmatter.title}
+          author={post.frontmatter.author}
+        />
+      ))
+    }
+  </ul>
+</BaseLayout>

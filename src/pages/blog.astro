@@ -3,9 +3,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
 import type { MarkdownInstance } from "astro";
 
-const allPosts: MarkdownInstance<any>[] = Object.values(
-  import.meta.glob("./posts/*.md", { eager: true })
-); // to return information about all your Markdown files. import.meta.glob() will return an array of objects, one for each blog post.
+interface Frontmatter {
+  title: string;
+  pubDate: Date;
+  author: string;
+  description: string;
+  image: {
+    url: string;
+    alt: string;
+  };
+}
+
+const allPosts: MarkdownInstance<Frontmatter>[] = Object.values(
+  import.meta.glob<MarkdownInstance<Frontmatter>>("./posts/*.md", {
+    eager: true,
+  })
+); // to return information about all your Markdown files use import.meta.glob(), this will return an array of objects, one for each blog post in this case.
 
 const pageTitle: string = "My Astro Learning Blog";
 ---
@@ -44,6 +57,4 @@ const pageTitle: string = "My Astro Learning Blog";
       }
     </ul>
   </BaseLayout>
-
-
 </html>
