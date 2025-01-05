@@ -110,4 +110,6 @@ getHeadings(): Promise<{ depth: number; slug: string; text: string }[]>;
 default: AstroComponentFactory;
 }
 ```
+
 11. La función `getStaticPaths` devuelve una arreglo de rutas de página, y todas las páginas en esas rutas usarán la misma plantilla definida en el archivo.
+    Una función `getStaticPaths` siempre debe devolver una lista de objetos que contengan `params` (cómo llamar a cada ruta de página) y, opcionalmente, cualquier `props` (datos que desea pasar a esas páginas).

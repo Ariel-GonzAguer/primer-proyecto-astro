@@ -24,7 +24,7 @@ interface Paths {
   };
 }
 
-//→ Create pages dynamically
+//→ Crea rutas dinamicamente
 export async function getStaticPaths(): Promise<Paths[]> {
   // → make data from all your blog posts available to each page route. Always inside getStaticPaths()
   const allPosts: MarkdownInstance<Frontmatter>[] = Object.values(
@@ -33,20 +33,44 @@ export async function getStaticPaths(): Promise<Paths[]> {
     })
   );
 
-  const tags = [
-    "astro",
-    "successes",
-    "community",
-    "blogging",
-    "setbacks",
-    "learning in public",
-    "notas personales",
+  // → para obtener todas las etiquetas únicas dinamicamente
+  const uniqueTags = [
+    ...new Set(
+      allPosts
+        .map((post: MarkdownInstance<Frontmatter>) => post.frontmatter.tags)
+        .flat()
+    ),
   ];
 
-  return tags.map((tag): Paths => ({
-    params: { tag },
-    props: { posts: allPosts },
-  }));
+  // → retornar arreglo de objetos con las rutas dinámicas para las tags únicas
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter(
+      (post: MarkdownInstance<Frontmatter>) =>
+        post.frontmatter.tags.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+
+  // → rutas que se generan dinámicamente
+  // const tags = [
+  //   "astro",
+  //   "successes",
+  //   "community",
+  //   "blogging",
+  //   "setbacks",
+  //   "learning in public",
+  //   "notas personales",
+  // ];
+
+  // return tags.map(
+  //   (tag): Paths => ({
+  //     params: { tag },
+  //     props: { posts: allPosts },
+  //   })
+  // );
 
   // → or you can do an extended version like this:
   // return [
@@ -63,16 +87,18 @@ export async function getStaticPaths(): Promise<Paths[]> {
 // → estos valores se obtienen de getStaticPaths() automáticamente
 const { tag } = Astro.params;
 const { posts } = Astro.props;
-const filteredPosts = posts.filter((post: MarkdownInstance<Frontmatter>) =>
-  post.frontmatter.tags?.includes(tag)
-);
+
+// → si no se hace un filtrado dentro de getStaticPaths() se puede hacer aquí
+// const filteredPosts = posts.filter((post: MarkdownInstance<Frontmatter>) =>
+//   post.frontmatter.tags?.includes(tag)
+// );
 ---
 
 <BaseLayout pageTitle={tag}>
   <p>Posts tagged with {tag}</p>
   <ul>
     {
-      filteredPosts.map((post: any) => (
+      posts.map((post: any) => (
         <BlogPost
           url={post.url}
           title={post.frontmatter.title}
