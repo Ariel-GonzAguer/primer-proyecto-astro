@@ -114,9 +114,26 @@ default: AstroComponentFactory;
 11. La función `getStaticPaths` devuelve una arreglo de rutas de página, y todas las páginas en esas rutas usarán la misma plantilla definida en el archivo.
     Una función `getStaticPaths` siempre debe devolver una lista de objetos que contengan `params` (cómo llamar a cada ruta de página) y, opcionalmente, cualquier `props` (datos que desea pasar a esas páginas).
 
-12. Patrón `/pages/folder/index.astro`: el archivo `index.astro` dentro de cada `folder` de la carpeta `pages` es el que se renderiza cuando se accede a la ruta de la carpeta.  
+12. Patrón `/pages/folder/index.astro`: el archivo `index.astro` dentro de cada `folder` de la carpeta `pages` es el que se renderiza cuando se accede a la ruta de la carpeta.
 
 13. @astrojs/rss: Astro ofrece un paquete personalizado para agregar rápidamente un feed RSS a su sitio web.
-Este paquete oficial genera un documento no-HTML con información sobre todas las publicaciones de su blog que pueden leer lectores de feeds como Feedly, The Old Reader y otros. Este documento se actualiza cada vez que se reconstruye su sitio.
-Las personas pueden suscribirse a su feed en un lector de feeds y recibir una notificación cuando publique una nueva publicación de blog en su sitio, lo que lo convierte en una característica popular de los blogs.
+    Este paquete oficial genera un documento no-HTML con información sobre todas las publicaciones de su blog que pueden leer lectores de feeds como Feedly, The Old Reader y otros. Este documento se actualiza cada vez que se reconstruye su sitio.
+    Las personas pueden suscribirse a su feed en un lector de feeds y recibir una notificación cuando publique una nueva publicación de blog en su sitio, lo que lo convierte en una característica popular de los blogs.
+
 - npm install @astrojs/rss
+- crear el archivo `rss.xml` en la carpeta `src/pages`:
+
+```
+import rss, { pagesGlobToRssItems } from "@astrojs/rss";
+
+export async function GET(context) {
+return rss({
+ title: "Astro Learner | Blog",
+ description: "My journey learning Astro",
+ site: context.site,
+ items: await pagesGlobToRssItems(import.meta.glob("./**/*.md")),
+ customData: `<language>en-us</language>`,
+});
+}
+```
+- agregar `site: "https://astro0.netlify.app/"` en el archivo `astro.config.mjs`.
