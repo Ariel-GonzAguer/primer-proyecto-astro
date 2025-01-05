@@ -22,12 +22,13 @@ export async function GET(context) {
     title: "Astro Learner | Blog",
     description: "My journey learning Astro",
     site: context.site,
-    items: await Promise.all(
-      posts.map(async (post) => ({
-        link: post.url,
-        content: sanitizeHtml(await post.compiledContent()),
-        ...post.frontmatter,
-      }))
-    ),
+    items: posts.map((post) => ({
+      link: post.url,
+      title: post.frontmatter.title,
+      description: sanitizeHtml(post.compiledContent()),
+      pubDate: post.frontmatter.pubDate,
+      customData: `<content:encoded><![CDATA[${sanitizeHtml(post.compiledContent())}]]></content:encoded>`,
+    })),
+    customData: `<language>en-us</language>`,
   });
 }
