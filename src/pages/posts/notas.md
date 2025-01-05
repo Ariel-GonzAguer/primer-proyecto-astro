@@ -3,7 +3,7 @@ layout: "../../layouts/MarkdownPostLayout.astro" # When you include the layout f
 title: "Notas del tutorial"
 pubDate: 2025-12-01
 description: "notas sobre Astro."
-author: "Astro Learner"
+author: "Ariel-Astro-Learner"
 image:
   url: "https://docs.astro.build/assets/rose.webp"
   alt: "The Astro logo on a dark background with a pink glow."
