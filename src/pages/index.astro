@@ -1,7 +1,17 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Greeting from "@components/preact/Greeting";
+import PreactCounter from "@components/preact/PreactCounter";
+import ReactCounter from "@components/react/ReactCounter";
+
 const pageTitle: string = "Home Page";
 ---
+
 <BaseLayout pageTitle={pageTitle}>
   <h2>My awesome blog subtitle</h2>
+  <!-- <Greeting messages={["Hi", "Hello", "Howdy", "Hey there"]} /> -->
+  <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
+  <PreactCounter client:load />
+  <!-- The second button works because the `client:load` directive tells Astro to send and rerun its JavaScript on the client when the page loads, making the component interactive. This is called a `hydrated component`. -->
+  <ReactCounter client:only="react" />
 </BaseLayout>

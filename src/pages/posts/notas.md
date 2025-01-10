@@ -137,3 +137,4 @@ return rss({
 }
 ```
 - agregar `site: "https://astro0.netlify.app/"` en el archivo `astro.config.mjs`.
+- agregar al feed `https://mi-sitio/.com.rss.xml`

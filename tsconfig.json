@@ -7,7 +7,6 @@
   "exclude": [
     "dist"
   ],
-  // relative paths 😁
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -23,6 +22,8 @@
       "@posts/*": [
         "src/pages/posts/*"
       ]
-    }
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }
