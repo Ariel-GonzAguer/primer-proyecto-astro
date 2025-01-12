@@ -1,15 +1,7 @@
-import { useState, useEffect } from "preact/hooks";
+import { useState } from "preact/hooks";
 
 export default function Counter() {
   const [count, setCount] = useState<number>(0);
-
-  useEffect(() => {
-    document.title = `You clicked ${count} times`;
-  }, [count]);
-
-  useEffect(() => {
-    count === 6 ? alert(666) : null;
-  })
 
   return (
     <div>

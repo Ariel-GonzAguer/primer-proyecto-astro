@@ -1,0 +1,15 @@
+---
+const BTN = "Alerta BTN";
+---
+
+<button id="button"> {BTN} </button>
+
+<script>
+  const BTN = document.getElementById("button");
+  const alerta = "Hola";
+  console.log(BTN);
+
+  BTN?.addEventListener("click", () => {
+    alert(alerta);
+  });
+</script>

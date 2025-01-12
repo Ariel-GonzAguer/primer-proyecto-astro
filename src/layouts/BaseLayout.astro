@@ -3,12 +3,13 @@ import "../styles/global.css";
 
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
+import ConfettiButton from "@components/ConfettiButton.astro";
 
 interface Props {
   pageTitle: string;
 }
 
-const {pageTitle}: Props = Astro.props;
+const { pageTitle }: Props = Astro.props;
 // Astro.props contiene directamente las propiedades que necesitas, por lo que puedes desestructurarlas directamente.
 ---
 
@@ -23,9 +24,10 @@ const {pageTitle}: Props = Astro.props;
   <body>
     <Header />
     <h1>{pageTitle}</h1>
-    
+    <ConfettiButton />
+
     <slot />
-    
+
     <Footer />
     <script>
       import "../scripts/menu.ts";
