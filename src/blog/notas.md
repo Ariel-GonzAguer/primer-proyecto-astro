@@ -1,5 +1,5 @@
 ---
-layout: "@layouts/MarkdownPostLayout.astro" # When you include the layout frontmatter property in an .md file, all of your frontmatter YAML values are available to the layout file.
+# layout: "@layouts/MarkdownPostLayout.astro" # When you include the layout frontmatter property in an .md file, all of your frontmatter YAML values are available to the layout file.
 title: "Notas del tutorial"
 pubDate: 2025-12-01
 description: "notas sobre Astro."
