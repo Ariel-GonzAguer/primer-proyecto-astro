@@ -7,7 +7,7 @@ import { z, defineCollection } from "astro:content";
 // Define a `loader` and `schema` for each collection
 const blog = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/blog" }),
-  schema: z.object({
+  schema: z.object({ // definir el esquema/forma de los datos/posts/blogs que se van a cargar
     title: z.string(),
     pubDate: z.date(),
     description: z.string(),

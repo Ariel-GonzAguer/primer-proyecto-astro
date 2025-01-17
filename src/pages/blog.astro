@@ -6,6 +6,7 @@ import { getCollection } from "astro:content"; // agregar para content collectio
 const allPosts = await getCollection("blog"); // agregar para content collection
 
 const pageTitle: string = "My Astro Learning Blog";
+
 ---
 
 <html lang="en">
@@ -21,7 +22,11 @@ const pageTitle: string = "My Astro Learning Blog";
     <ul>
       {
         allPosts.map((post: any) => (
-          <BlogPost url={`/posts/${post.id}/`} title={post.data.title} /> // agregar para content collection
+          <BlogPost
+            url={`/posts/${post.id}/`}
+            title={post.data.title}
+            author={post.data.author}
+          /> // agregar para content collection
         ))
       }
     </ul>
