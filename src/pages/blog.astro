@@ -1,26 +1,8 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import BlogPost from "@components/BlogPost.astro";
-import type { MarkdownInstance } from "astro";
 import { getCollection } from "astro:content"; // agregar para content collection
 
-interface Frontmatter {
-  title: string;
-  pubDate: Date;
-  author: string;
-  description: string;
-  image: {
-    url: string;
-    alt: string;
-  };
-}
-
-/* const allPosts: MarkdownInstance<Frontmatter>[] = Object.values(
-  import.meta.glob<MarkdownInstance<Frontmatter>>("./posts/*.md", {
-    eager: true,
-  })
-); // to return information about all your Markdown files use import.meta.glob(), this will return an array of objects, one for each blog post in this case.
-*/ //quitar para content collection
 const allPosts = await getCollection("blog"); // agregar para content collection
 
 const pageTitle: string = "My Astro Learning Blog";
@@ -37,28 +19,13 @@ const pageTitle: string = "My Astro Learning Blog";
   <BaseLayout pageTitle={pageTitle}>
     <p>This is where I will post about my journey learning Astro.</p>
     <ul>
-      <!-- <li><a href="/posts/post-1/">Post 1</a></li>
-      <li><a href="/posts/post-2/">Post 2</a></li>
-      <li><a href="/posts/post-3/">Post 3</a></li> -->
-
-      <!-- {
-        allPosts.map((post: any) => (
-          <li>
-            <a href={post.url}>{post.frontmatter.title}</a>
-          </li>
-        ))
-      } -->
-
       {
         allPosts.map((post: any) => (
-          <BlogPost
-            url={post.url}
-            title={post.frontmatter.title}
-            author={post.frontmatter.author}
-          />
+          <BlogPost url={`/posts/${post.id}/`} title={post.data.title} /> // agregar para content collection
         ))
       }
     </ul>
   </BaseLayout>
+
 
 </html>

@@ -62,4 +62,18 @@ const { Content } = await render(post);
 </MarkdownPostLayout> //+ agregar
 ```
 
-6. Elimina la propiedad `layout` del frontmatter de cada publicación individual. Ahora, tu contenido se envuelve en un diseño cuando se muestra y esta propiedad ya no es necesaria.
+6. Elimina la propiedad `layout` del frontmatter de cada post individual. Ahora, tu contenido se envuelve en un diseño cuando se muestra y esta propiedad ya no es necesaria.
+
+7. Reemplace `import.meta.glob()` con `getCollection()` en los archivos .md
+
+8. También deberá actualizar las referencias a los datos retornados para cada post. Ahora encontrará los valores de frontmatter en la propiedad de datos de cada objeto. Además, cuando utilice colecciones, cada objeto de publicación tendrá un `slug` de página, no una URL completa.
+
+9. Ahora hay que aplicar los mismos cambios a `src/pages/tags/[tag].astro` y `src/pages/tags/index.astro`:
+
+   - Cambiar `import.meta.glob()` por `getCollection()`.
+   - Acceder a los datos del frontmatter de cada post con `post.data` en lugar de `post.frontmatter`.
+   - cambiar la url de cada post con `/posts/${post.id}/` en lugar de `post.url`.
+
+10. Actualice los valores del frontmatter para que coincidan con su esquema. Ahora pubDate es un objeto Date, no una cadena. Hay que usar el método `.toLocaleDateString()` para convertirlo en una cadena.
+
+11. Actualizar la función de RSS. 
