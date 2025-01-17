@@ -1,6 +1,6 @@
 import rss from "@astrojs/rss";
-// import { pagesGlobToRssItems } from '@astrojs/rss';
-import { getCollection } from "astro:content";
+// import { pagesGlobToRssItems } from '@astrojs/rss'; quitar por content collection
+import { getCollection } from "astro:content"; // agregar para content collection
 
 export async function GET(context) {
   const posts = await getCollection("blog");
