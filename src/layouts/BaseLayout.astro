@@ -5,6 +5,9 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import ConfettiButton from "@components/ConfettiButton.astro";
 
+// test Zustand
+import Contador from "@components/react/Contador";
+
 interface Props {
   pageTitle: string;
 }
@@ -24,6 +27,7 @@ const { pageTitle }: Props = Astro.props;
   <body>
     <Header />
     <h1>{pageTitle}</h1>
+    Contador: <Contador client:load /> <br />
     <ConfettiButton />
 
     <slot />

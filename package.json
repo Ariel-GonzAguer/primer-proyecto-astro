@@ -16,6 +16,7 @@
     "@types/react-dom": "^19.0.2",
     "astro": "^5.1.7",
     "canvas-confetti": "^1.9.3",
+    "immer": "^10.1.1",
     "preact": "^10.25.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

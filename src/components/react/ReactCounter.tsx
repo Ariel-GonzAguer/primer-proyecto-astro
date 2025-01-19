@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { zustandStore } from "../../zustand/useStore";
+
 
 export default function Counter() {
-  const [countR, setCountR] = useState<number>(0);
+
+  const { countInStore, increment, decrement } = zustandStore();
 
   return (
     <div>
       <h2>React Counter</h2>
-      <p>You clicked {countR} times</p>
-      <button onClick={() => setCountR(countR + 1)}>Click me to +1</button>
-      <button onClick={() => setCountR(countR - 1)}>Click me to -1</button>
+      <p>You clicked {countInStore} times</p>
+      <button onClick={increment}>Click me to +1</button>
+      <button onClick={decrement}>Click me to -1</button>
     </div>
   );
 }

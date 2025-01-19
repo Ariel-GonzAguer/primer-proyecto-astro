@@ -2,7 +2,19 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import BlogPost from "@components/BlogPost.astro";
 import type { MarkdownInstance } from "astro";
-import type { Frontmatter } from "@tags/[tag].astro";
+// import type { Frontmatter } from "@tags/[tag].astro";
+
+export interface Frontmatter {
+  title: string;
+  pubDate: Date;
+  author: string;
+  description: string;
+  image: {
+    url: string;
+    alt: string;
+  };
+  tags: string[];
+}
 
 export interface Paths {
   params: {
@@ -43,7 +55,6 @@ export async function getStaticPaths(): Promise<Paths[]> {
 
 const { author } = Astro.params;
 const { posts } = Astro.props;
-
 ---
 
 <BaseLayout pageTitle={author}>

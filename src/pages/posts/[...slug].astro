@@ -2,10 +2,13 @@
 import { getCollection, render } from "astro:content";
 import MarkdownPostLayout from "../../layouts/MarkdownPostLayout.astro";
 
+const postsX = await getCollection("blog");
+
+
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
-    params: { slug: post.id },
+    params: { slug: post.id }, // cuando se usa content collection, params debe tener un objeto con una propiedad llamada slug, cuyo valor es el id del post
     props: { post },
   }));
 }
