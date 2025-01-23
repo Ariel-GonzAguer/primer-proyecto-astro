@@ -11,7 +11,7 @@ const pageTitle: string = "Home Page";
   <h2>My awesome blog subtitle</h2>
   <!-- <Greeting messages={["Hi", "Hello", "Howdy", "Hey there"]} /> -->
   <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
-  <PreactCounter client:load />
+  <PreactCounter client:only="preact" />
   <!-- The second button works because the `client:load` directive tells Astro to send and rerun its JavaScript on the client when the page loads, making the component interactive. This is called a `hydrated component`. -->
   <ReactCounter client:only="react" />
 </BaseLayout>
