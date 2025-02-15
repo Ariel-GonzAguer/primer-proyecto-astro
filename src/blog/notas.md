@@ -13,13 +13,13 @@ tags: ["astro", "blogging", "learning in public", "notas personales"]
 1. para crear rutas para las páginas, agregar archivos .astro a carpeta pages.
 
 2. el js se escribe entre --- y ---, para después poder usarlo dentro del html.
-3. las props se crean en el componente hijo con
+3. las props se declaran en el componente hijo con
 
 ```
 const {propARecibir} = Astro.props;
 ```
 
-y se pasan como props al componente padre
+y se pasan como props en componente padre
 
 ```
 ---
@@ -31,7 +31,7 @@ const pageTitle: string = "Home Page"; // se da el valor a la prop en el compone
 </BaseLayout>
 ```
 
-4. El <slot / > permite inyectar (o “colocar”) contenido secundario (hijos) escrito entre las etiquetas de apertura y cierre < Component >< /Component> en cualquier archivo `Component.astro`.
+4. El <slot / > permite inyectar (o “colocar”) contenido secundario (hijos) escrito entre las etiquetas de apertura y cierre < Component >< /Component> en cualquier archivo .astro.
 
 5. slot con nombre  
    Un componente layout Astro también puede tener slot con nombre. Esto le permite pasar solo elementos HTML con el nombre del slot correspondiente a la ubicación exacta del slot. Los slot se nombran utilizando el atributo `name`:
