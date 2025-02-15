@@ -3,6 +3,19 @@ import Social from "./Social.astro";
 import AlertBTN from "./AlertBTN.astro";
 ---
 
+<script>
+  import { zustandStore } from "../zustand/useStore";
+
+  // suscripción al estado de Zustand para cambiar el color del footer
+  zustandStore.subscribe((state) => {
+    const footer = document.querySelector("footer");
+    if (footer) {
+      const newColor = state.countInStore < 10 ? "transparent" : "green";
+      footer.style.backgroundColor = newColor;
+    }
+  });
+</script>
+
 <style>
   footer {
     display: flex;

@@ -5,11 +5,13 @@ const BTN = "Alerta BTN";
 <button id="button"> {BTN} </button>
 
 <script>
+  import { zustandStore } from "../zustand/useStore";
+
   const BTN = document.getElementById("button");
   const alerta = "Hola";
-  console.log(BTN);
 
   BTN?.addEventListener("click", () => {
     alert(alerta);
+    zustandStore.getState().decrement();
   });
 </script>
